@@ -1,4 +1,3 @@
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
 void main() {
@@ -20,9 +19,7 @@ class StateMyApp extends State<StatefulWidget> {
   @override
   void initState() {
     super.initState();
-    if (kDebugMode) {
-      print("Init State Method Called");
-    }
+
     notes = [
       "Raul's Learning Flutter",
       "Make breakfast",
@@ -36,11 +33,12 @@ class StateMyApp extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print("Method build Refreshed");
-    }
     return MaterialApp(
       title: "MyApp",
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Flutter Title App"),
@@ -51,11 +49,7 @@ class StateMyApp extends State<StatefulWidget> {
         floatingActionButton: FloatingActionButton(
           onPressed: (() {
             setState(() {
-              if (kDebugMode) {
-                notes.add("New note added");
-                print("Pressed Click Button");
-                print(notes.length);
-              }
+              notes.add("New note added");
             });
           }),
           child: const Icon(Icons.view_list),
@@ -66,8 +60,8 @@ class StateMyApp extends State<StatefulWidget> {
 }
 
 class Reminders extends StatelessWidget {
-  Reminders(this.note, {super.key});
-  String note;
+  const Reminders(this.note, {super.key});
+  final String note;
 
   @override
   Widget build(BuildContext context) {
