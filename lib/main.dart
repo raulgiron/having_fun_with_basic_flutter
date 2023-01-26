@@ -43,7 +43,7 @@ class StateMyApp extends State<StatefulWidget> {
         appBar: AppBar(
           title: const Text("Flutter Title App"),
         ),
-        body: Column(
+        body: ListView(
           children: notes.map((e) => Reminders(e)).toList(),
         ),
         floatingActionButton: FloatingActionButton(
