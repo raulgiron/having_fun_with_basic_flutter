@@ -44,6 +44,7 @@ class StateMyApp extends State<StatefulWidget> {
           title: const Text("Flutter Title App"),
         ),
         body: ListView.builder(
+          scrollDirection: Axis.vertical,
           itemCount: notes.length,
           itemBuilder: (context, position) {
             return Reminders(notes[position]);
