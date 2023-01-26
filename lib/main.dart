@@ -37,14 +37,17 @@ class StateMyApp extends State<StatefulWidget> {
       title: "MyApp",
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.brown),
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Flutter Title App"),
         ),
-        body: ListView(
-          children: notes.map((e) => Reminders(e)).toList(),
+        body: ListView.builder(
+          itemCount: notes.length,
+          itemBuilder: (context, position) {
+            return Reminders(notes[position]);
+          },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (() {
@@ -60,15 +63,23 @@ class StateMyApp extends State<StatefulWidget> {
 }
 
 class Reminders extends StatelessWidget {
-  const Reminders(this.note, {super.key});
   final String note;
+  const Reminders(this.note, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Center(
-        child: Text(note),
+    return GestureDetector(
+      child: Card(
+        child: Center(
+          child: Text(note),
+        ),
       ),
+      onTap: () {
+        debugPrint("Clicked on task $note");
+      },
+      onDoubleTap: () {
+        debugPrint("Double clicked on task $note");
+      },
     );
   }
 }
